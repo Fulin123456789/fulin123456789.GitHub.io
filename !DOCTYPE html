@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Summary</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="feedback-summary">
+  <h2>反馈意见汇总</h2>
+  <ul id="feedback-list">
+    <!-- 这里将通过AJAX动态添加反馈内容 -->
+  </ul>
+</div>
+
+<script>
+  $(document).ready(function() {
+    // 使用AJAX从后端获取反馈数据
+    $.ajax({
+      url: '/get-feedback', // 后端接口地址
+      method: 'GET',
+      success: function(data) {
+        // 成功获取数据后，将其展示在页面上
+        data.forEach(function(feedback) {
+          $('#feedback-list').append(`<li>${feedback.name}: ${feedback.feedback}</li>`);
+        });
+      },
+      error: function(err) {
+        console.error('获取反馈数据失败', err);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
